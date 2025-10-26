@@ -1,0 +1,16 @@
+{
+  "ide": {
+    "enabled": true,
+    "hasSeenNudge": true
+  },
+  "mcpServers": {
+    "sanket-cloudrun-server": {
+      "httpUrl": "https://devfest-mcp-server-13067644653.asia-south1.run.app/mcp"
+    }
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  }
+}

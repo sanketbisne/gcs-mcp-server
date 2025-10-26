@@ -1,0 +1,26 @@
+
+[prompt]
+name = "set_bucket_cors"
+description = "Set the CORS configuration for a GCS bucket."
+content = """
+I want to set the CORS configuration for a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The CORS rules as a JSON string.
+
+For example, a valid JSON for CORS rules would be:
+```
+[
+    {
+        "origin": ["http://example.com"],
+        "responseHeader": ["Content-Type"],
+        "method": ["GET", "HEAD"],
+        "maxAgeSeconds": 3600
+    }
+]
+```
+
+Once you have this information, please run the following command:
+{{#tool}}set_bucket_cors(bucket_name=<bucket_name>, cors_rules=<cors_rules_json>){{/tool}}
+"""

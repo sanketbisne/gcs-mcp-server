@@ -1,0 +1,14 @@
+
+[prompt]
+name = "file_info"
+description = "Get detailed metadata for a specific file in a bucket."
+content = """
+I want to get metadata for a file in a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The name of the blob (file).
+
+Once you have this information, please run the following command:
+{{#tool}}get_blob_metadata(bucket_name=<bucket_name>, blob_name=<blob_name>){{/tool}}
+"""

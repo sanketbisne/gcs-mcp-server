@@ -1,0 +1,15 @@
+
+[prompt]
+name = "rename_file"
+description = "Rename a file in a GCS bucket."
+content = """
+I want to rename a file in a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The current name of the blob (file).
+- The new name for the blob (file).
+
+Once you have this information, please run the following command:
+{{#tool}}rename_blob(bucket_name=<bucket_name>, blob_name=<blob_name>, new_name=<new_name>){{/tool}}
+"""

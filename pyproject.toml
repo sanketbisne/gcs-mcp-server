@@ -1,0 +1,13 @@
+[project]
+name = "gcs-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastmcp==2.12.4",
+    "google-cloud-storage",
+    "google-api-core",
+    "pydantic",
+    "uvicorn"
+]

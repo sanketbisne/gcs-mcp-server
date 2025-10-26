@@ -1,0 +1,12 @@
+
+[prompt]
+name = "bucket_info"
+description = "Get detailed metadata for a specific bucket."
+content = """
+I want to get metadata for a GCS bucket.
+
+Please ask me for the name of the bucket.
+
+Once you have the bucket name, please run the following command:
+{{#tool}}get_bucket_metadata(bucket_name=<bucket_name>){{/tool}}
+"""

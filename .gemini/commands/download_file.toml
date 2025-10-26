@@ -1,0 +1,15 @@
+
+[prompt]
+name = "download_file"
+description = "Download a file from a GCS bucket."
+content = """
+I want to download a file from a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The name of the blob (file) to download.
+- The local destination file path.
+
+Once you have this information, please run the following command:
+{{#tool}}download_blob(bucket_name=<bucket_name>, blob_name=<blob_name>, destination_file_name=<destination_file_name>){{/tool}}
+"""

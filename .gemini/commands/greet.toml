@@ -1,0 +1,12 @@
+
+[prompt]
+name = "greet"
+description = "A friendly greeting."
+content = """
+I want to be greeted.
+
+Please ask me for my name.
+
+Once you have my name, please run the following command:
+{{#tool}}greet(name=<name>){{/tool}}
+"""

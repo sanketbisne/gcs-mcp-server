@@ -1,0 +1,14 @@
+
+[prompt]
+name = "delete_file"
+description = "Delete a file from a GCS bucket."
+content = """
+I want to delete a file from a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The name of the blob (file) to delete.
+
+Once you have this information, please run the following command:
+{{#tool}}delete_blob(bucket_name=<bucket_name>, blob_name=<blob_name>){{/tool}}
+"""

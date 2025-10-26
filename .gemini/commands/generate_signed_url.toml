@@ -1,0 +1,15 @@
+
+[prompt]
+name = "generate_signed_url"
+description = "Generate a signed URL for a file in a bucket."
+content = """
+I want to generate a signed URL for a file in a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The name of the blob (file).
+- The expiration time in minutes (optional, defaults to 15).
+
+Once you have this information, please run the following command:
+{{#tool}}generate_signed_url(bucket_name=<bucket_name>, blob_name=<blob_name>, expiration_minutes=<expiration_minutes>){{/tool}}
+"""

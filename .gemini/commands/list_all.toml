@@ -1,0 +1,10 @@
+
+[prompt]
+name = "list_all"
+description = "List all GCS buckets and the objects within each bucket."
+content = """
+{{#tool}}list_gcs_buckets{{/tool}}
+
+For each bucket in the list, please run the following command:
+{{#tool}}list_objects(bucket_name=<bucket_name>){{/tool}}
+"""

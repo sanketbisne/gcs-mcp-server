@@ -1,0 +1,10 @@
+
+[prompt]
+name = "health_check"
+description = "Check the health of the server."
+content = """
+I want to check the health of the server.
+
+Please run the following command:
+{{#tool}}health_check{{/tool}}
+"""

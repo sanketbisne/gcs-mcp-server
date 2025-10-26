@@ -1,0 +1,15 @@
+
+[prompt]
+name = "upload_file"
+description = "Upload a file to a GCS bucket."
+content = """
+I want to upload a file to a GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The local path of the file to upload.
+- The destination object name in the bucket.
+
+Once you have this information, please run the following command:
+{{#tool}}upload_blob(bucket_name=<bucket_name>, source_file_name=<source_file_name>, destination_blob_name=<destination_blob_name>){{/tool}}
+"""

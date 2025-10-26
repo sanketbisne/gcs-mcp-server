@@ -1,0 +1,5 @@
+fastmcp
+google-cloud-storage
+google-api-core
+pydantic
+uvicorn

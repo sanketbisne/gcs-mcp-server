@@ -1,0 +1,14 @@
+
+[prompt]
+name = "create_bucket"
+description = "Create a new GCS bucket."
+content = """
+I want to create a new GCS bucket.
+
+Please ask me for the following information:
+- The name of the bucket.
+- The location for the bucket (optional, defaults to US).
+
+Once you have this information, please run the following command:
+{{#tool}}create_bucket(bucket_name=<bucket_name>, location=<location>){{/tool}}
+"""
