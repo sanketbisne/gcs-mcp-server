@@ -1,5 +1,6 @@
 from fastmcp import FastMCP
 from google.cloud import storage
+
 from google.api_core import exceptions
 from datetime import timedelta
 import os
@@ -235,5 +236,34 @@ def copy_blob(source_bucket_name: str, blob_name: str, destination_bucket_name: 
         return f"Blob '{blob_name}' copied to '{destination_blob_name}' in bucket '{destination_bucket_name}'."
     except exceptions.NotFound:
         return f"Error: Source or destination bucket not found."
+    except Exception as e:
+        return f"An unexpected error occurred: {e}"
+
+# ---------------------------------------------------------
+# 14️⃣ Set CORS configuration for a bucket
+# ---------------------------------------------------------
+@mcp.tool
+def set_bucket_cors(bucket_name: str, cors_rules: list[dict]) -> str:
+    """Sets the CORS configuration for a bucket.
+
+    Args:
+        bucket_name: The name of the bucket.
+        cors_rules: A list of dictionaries, where each dictionary represents a CORS rule.
+                    Example: [
+                        {
+                            "origin": ["http://example.com"],
+                            "method": ["GET", "POST"],
+                            "response_header": ["Content-Type"],
+                            "max_age_seconds": 3600
+                        }
+                    ]
+    """
+    try:
+        bucket = storage_client.get_bucket(bucket_name)
+        bucket.cors = cors_rules
+        bucket.patch()
+        return f"CORS configuration updated for bucket '{bucket_name}'."
+    except exceptions.NotFound:
+        return f"Error: Bucket '{bucket_name}' not found."
     except Exception as e:
         return f"An unexpected error occurred: {e}"

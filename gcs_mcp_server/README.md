@@ -45,11 +45,10 @@ This command will open a browser window for you to log in and grant the necessar
 
 ## Running the Server
 
-The best way to run the server during development is with the `fastmcp run` command. It starts your server and then run `fastmcp dev` which launches the **MCP Inspector**, a web UI for interactively testing your tools.
+The best way to run the server during development is with the `fastmcp run` command. It starts your server and launches the **MCP Inspector**, a web UI for interactively testing your tools.
 
 ```bash
-fastmcp run main.py --transport="http" --port="8080"
-fastmcp dev main.py --ui-port="9080" --server-port="5080"
+fastmcp run main.py --transport="http" --port="8080" --ui-port="9080"
 ```
 
 You should see output confirming that the server is running and listing the available tools:
@@ -63,8 +62,6 @@ The following tools are available:
 - ... (and all other tools)
 ================================================================================
 ```
-
-
 
 All tool endpoints are available under the `/mcp/` path. You can interact with them using any HTTP client, such as `curl`.
 You can interact with the server's tools using the `mcp-inspector` command-line utility, which comes bundled with `fastmcp`. It provides a more convenient way to call tools than using `curl`.
@@ -91,6 +88,7 @@ Below is a complete list of the available tools and their parameters.
 | `generate_signed_url` | Generates a temporary signed URL. | `bucket_name: str`, `blob_name: str`, `expiration_minutes: int = 15` |
 | `rename_blob` | Renames/moves an object. | `bucket_name: str`, `blob_name: str`, `new_name: str` |
 | `copy_blob` | Copies an object to another bucket. | `source_bucket_name: str`, `blob_name: str`, `destination_bucket_name: str`, `destination_blob_name: str` |
+| `set_bucket_cors` | Sets the CORS configuration for a bucket. | `bucket_name: str`, `cors_rules: list[dict]` |
 
 
 **Example:**
