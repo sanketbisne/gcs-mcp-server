@@ -23,6 +23,7 @@ def greet(name: str) -> str:
 def list_gcs_buckets() -> list[str]:
     """Lists all GCS buckets in the project."""
     try:
+        storage_client = storage.Client()
         buckets = storage_client.list_buckets()
         return [bucket.name for bucket in buckets]
     except exceptions.Forbidden as e:
@@ -37,6 +38,7 @@ def list_gcs_buckets() -> list[str]:
 def create_bucket(bucket_name: str, location: str = "US") -> str:
     """Creates a new GCS bucket. Bucket names must be globally unique."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         bucket.location = location
         storage_client.create_bucket(bucket)
@@ -55,6 +57,7 @@ def create_bucket(bucket_name: str, location: str = "US") -> str:
 def delete_bucket(bucket_name: str) -> str:
     """Deletes a GCS bucket. The bucket must be empty unless force is used."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         # force=True deletes the bucket even if it contains objects. Use with caution.
         bucket.delete(force=True)
@@ -73,6 +76,7 @@ def delete_bucket(bucket_name: str) -> str:
 def list_objects(bucket_name: str) -> list[str]:
     """Lists all objects in a specified GCS bucket."""
     try:
+        storage_client = storage.Client()
         blobs = storage_client.list_blobs(bucket_name)
         return [blob.name for blob in blobs]
     except exceptions.NotFound:
@@ -87,6 +91,7 @@ def list_objects(bucket_name: str) -> list[str]:
 def upload_blob(bucket_name: str, source_file_name: str, destination_blob_name: str) -> str:
     """Uploads a local file to a GCS bucket."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(destination_blob_name)
         blob.upload_from_filename(source_file_name)
@@ -107,6 +112,7 @@ def upload_blob(bucket_name: str, source_file_name: str, destination_blob_name: 
 def download_blob(bucket_name: str, blob_name: str, destination_file_name: str) -> str:
     """Downloads a blob from a GCS bucket to a local file."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(blob_name)
         blob.download_to_filename(destination_file_name)
@@ -123,6 +129,7 @@ def download_blob(bucket_name: str, blob_name: str, destination_file_name: str) 
 def delete_blob(bucket_name: str, blob_name: str) -> str:
     """Deletes a blob from a GCS bucket."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(blob_name)
         blob.delete()
@@ -141,6 +148,7 @@ def delete_blob(bucket_name: str, blob_name: str) -> str:
 def get_bucket_metadata(bucket_name: str) -> dict:
     """Retrieves metadata for a GCS bucket."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.get_bucket(bucket_name)
         return {
             "id": bucket.id,
@@ -163,6 +171,7 @@ def get_bucket_metadata(bucket_name: str) -> dict:
 def get_blob_metadata(bucket_name: str, blob_name: str) -> dict:
     """Retrieves metadata for a specific object in a bucket."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.get_blob(blob_name)
         if not blob:
@@ -189,6 +198,7 @@ def get_blob_metadata(bucket_name: str, blob_name: str) -> dict:
 def generate_signed_url(bucket_name: str, blob_name: str, expiration_minutes: int = 15) -> str:
     """Generates a signed URL for temporary access to a blob"""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(blob_name)
         
@@ -209,6 +219,7 @@ def generate_signed_url(bucket_name: str, blob_name: str, expiration_minutes: in
 def rename_blob(bucket_name: str, blob_name: str, new_name: str) -> str:
     """Renames a blob (object) within a GCS bucket."""
     try:
+        storage_client = storage.Client()
         bucket = storage_client.bucket(bucket_name)
         blob = bucket.blob(blob_name)
         if not blob.exists():
@@ -227,6 +238,7 @@ def rename_blob(bucket_name: str, blob_name: str, new_name: str) -> str:
 def copy_blob(source_bucket_name: str, blob_name: str, destination_bucket_name: str, destination_blob_name: str) -> str:
     """Copies an object from one GCS bucket to another."""
     try:
+        storage_client = storage.Client()
         source_bucket = storage_client.bucket(source_bucket_name)
         destination_bucket = storage_client.bucket(destination_bucket_name)
         blob = source_bucket.blob(blob_name)
@@ -259,6 +271,7 @@ def set_bucket_cors(bucket_name: str, cors_rules: list[dict]) -> str:
                     ]
     """
     try:
+        storage_client = storage.Client()
         bucket = storage_client.get_bucket(bucket_name)
         bucket.cors = cors_rules
         bucket.patch()
@@ -267,3 +280,11 @@ def set_bucket_cors(bucket_name: str, cors_rules: list[dict]) -> str:
         return f"Error: Bucket '{bucket_name}' not found."
     except Exception as e:
         return f"An unexpected error occurred: {e}"
+
+# ---------------------------------------------------------
+# 15️⃣ Health Check
+# ---------------------------------------------------------
+@mcp.tool
+def health_check() -> str:
+    """Returns a simple health check message."""
+    return "Server is up and running!"
