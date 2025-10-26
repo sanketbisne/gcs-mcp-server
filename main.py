@@ -20,8 +20,8 @@ mcp = FastMCP(name="MyEnhancedGCSMCPServer")
 # 1️⃣ Simple Greeting
 # ---------------------------------------------------------
 @mcp.tool
-def greet(name: str) -> str:
-    """Returns a friendly greeting"""
+def sayhi(name: str) -> str:
+    """Returns a friendly greetings"""
     return f"Hello {name}! It's a pleasure to connect from your enhanced MCP Server."
 
 # ---------------------------------------------------------
